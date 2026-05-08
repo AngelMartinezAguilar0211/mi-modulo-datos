@@ -44,4 +44,4 @@ Una vez que hayas completado el benchmark, puedes generar automáticamente la ba
 ```bash
 uv run python plot_results.py
 ```
-> **Nota:** Esto creará el archivo `report.md` con tablas y gráficas incrustadas.
+> **Nota:** Esto creará el archivo `report.md` en la raíz del ejercicio y guardará los archivos `.png` en la carpeta `results/`. 
