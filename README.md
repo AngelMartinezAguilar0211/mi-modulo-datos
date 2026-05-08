@@ -12,7 +12,7 @@ Encontrarse en la raíz de este repositorio y contar con el gestor de entornos `
 
 Para asegurar que el entorno está listo:
 ```bash
-uv sync  # O si recién clonas, se instalarán automáticamente al usar `uv run`
+uv sync
 ```
 
 ### Guía de Ejecución
