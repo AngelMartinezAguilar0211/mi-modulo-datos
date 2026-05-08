@@ -1,0 +1,42 @@
+[
+    {
+        "format": "csv",
+        "write_time_avg": 1.0776818156665893,
+        "full_read_time": 1.19258020999996,
+        "selective_read_time": 0.20958468399976482,
+        "file_size_bytes": 53321978,
+        "peak_memory_bytes": 126552870
+    },
+    {
+        "format": "jsonl",
+        "write_time_avg": 1.1901047209998978,
+        "full_read_time": 13.702968166999653,
+        "selective_read_time": 1.6808497049996731,
+        "file_size_bytes": 104821897,
+        "peak_memory_bytes": 1283255089
+    },
+    {
+        "format": "parquet_uncompressed",
+        "write_time_avg": 0.10185328700011571,
+        "full_read_time": 0.056680627999867284,
+        "selective_read_time": 0.01073025300001973,
+        "file_size_bytes": 31463951,
+        "peak_memory_bytes": 32009035
+    },
+    {
+        "format": "parquet_snappy",
+        "write_time_avg": 0.16585628166664415,
+        "full_read_time": 0.055553625999891665,
+        "selective_read_time": 0.016443882000203303,
+        "file_size_bytes": 27798674,
+        "peak_memory_bytes": 27814853
+    },
+    {
+        "format": "parquet_gzip",
+        "write_time_avg": 2.089805178000006,
+        "full_read_time": 0.13427111600003627,
+        "selective_read_time": 0.018591869000374572,
+        "file_size_bytes": 19573422,
+        "peak_memory_bytes": 19589378
+    }
+]
