@@ -6,6 +6,8 @@ Este repositorio contiene las soluciones a los ejercicios prácticos de Python, 
 
 Este primer ejercicio se centra en demostrar de forma empírica y técnica las diferencias de rendimiento (tiempo de lectura, tiempo de escritura, uso de RAM y tamaño en disco) entre formatos orientados a filas (CSV, JSON Lines) y orientados a columnas (Parquet con sus distintas compresiones).
 
+**NOTA:** El repositorio ya cuenta con resultados de benchmark para 100k, 500k y 1m; así como con las graficas de resultados visibles en el reporte. Hacer un nuevo benchmark reescribirá estos archivos.
+
 ### Requisitos Previos
 
 Encontrarse en la raíz de este repositorio y contar con el gestor de entornos `uv` correctamente instalado. Las dependencias ya están declaradas en el proyecto. 
