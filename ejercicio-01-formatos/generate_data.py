@@ -5,13 +5,16 @@ import uuid
 from datetime import datetime, timedelta
 import os
 
-def generate_data(size_str: str) -> pd.DataFrame:
+def generate_data(size_str: str, seed: int = None) -> pd.DataFrame:
+    if seed is not None:
+        np.random.seed(seed)
+        
     size_map = {'100k': 100_000, '500k': 500_000, '1m': 1_000_000}
     if size_str not in size_map:
         raise ValueError("Size must be 100k, 500k or 1m")
     
     n = size_map[size_str]
-    print(f"Generating {n} rows of data...")
+    print(f"Generating {n} rows of data (seed={seed})...")
     
     # Pre-generate values using numpy for speed
     transaction_ids = [str(uuid.uuid4()) for _ in range(n)]
@@ -53,9 +56,10 @@ def generate_data(size_str: str) -> pd.DataFrame:
 def main():
     parser = argparse.ArgumentParser(description="Generate transaction dataset")
     parser.add_argument('--size', type=str, required=True, choices=['100k', '500k', '1m'], help="Size of the dataset")
+    parser.add_argument('--seed', type=int, default=None, help="Random seed for reproducibility")
     args = parser.parse_args()
     
-    df = generate_data(args.size)
+    df = generate_data(args.size, args.seed)
     
     # Path to the data directory
     script_dir = os.path.dirname(os.path.abspath(__file__))

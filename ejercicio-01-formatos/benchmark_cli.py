@@ -9,10 +9,12 @@ def main():
     parser = argparse.ArgumentParser(description="Run storage benchmark")
     parser.add_argument('--size', type=str, required=True, choices=['100k', '500k', '1m'])
     parser.add_argument('--formats', nargs='+', required=True, help="Formats to benchmark. E.g. csv jsonl parquet_uncompressed parquet_snappy parquet_gzip")
+    parser.add_argument('--seed', type=int, default=None, help="Random seed for reproducibility")
+    parser.add_argument('--iters', type=int, default=5, help="Number of iterations for each measurement")
     args = parser.parse_args()
     
-    print(f"Generating base dataset in memory for size {args.size}...")
-    df = generate_data(args.size)
+    print(f"Generating base dataset in memory for size {args.size} (seed={args.seed})...")
+    df = generate_data(args.size, args.seed)
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
     data_dir = os.path.join(script_dir, '..', 'data')
@@ -24,11 +26,11 @@ def main():
     results = []
     
     valid_formats = {
-        'csv': lambda: benchmark_csv(df, os.path.join(data_dir, f'test_{args.size}.csv')),
-        'jsonl': lambda: benchmark_jsonl(df, os.path.join(data_dir, f'test_{args.size}.jsonl')),
-        'parquet_uncompressed': lambda: benchmark_parquet(df, os.path.join(data_dir, f'test_{args.size}_uncompressed.parquet'), compression=None),
-        'parquet_snappy': lambda: benchmark_parquet(df, os.path.join(data_dir, f'test_{args.size}_snappy.parquet'), compression='snappy'),
-        'parquet_gzip': lambda: benchmark_parquet(df, os.path.join(data_dir, f'test_{args.size}_gzip.parquet'), compression='gzip')
+        'csv': lambda: benchmark_csv(df, os.path.join(data_dir, f'test_{args.size}.csv'), iters=args.iters),
+        'jsonl': lambda: benchmark_jsonl(df, os.path.join(data_dir, f'test_{args.size}.jsonl'), iters=args.iters),
+        'parquet_uncompressed': lambda: benchmark_parquet(df, os.path.join(data_dir, f'test_{args.size}_uncompressed.parquet'), compression=None, iters=args.iters),
+        'parquet_snappy': lambda: benchmark_parquet(df, os.path.join(data_dir, f'test_{args.size}_snappy.parquet'), compression='snappy', iters=args.iters),
+        'parquet_gzip': lambda: benchmark_parquet(df, os.path.join(data_dir, f'test_{args.size}_gzip.parquet'), compression='gzip', iters=args.iters)
     }
     
     for fmt in args.formats:

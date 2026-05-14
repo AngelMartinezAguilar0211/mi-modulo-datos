@@ -1,42 +1,47 @@
 [
     {
         "format": "csv",
-        "write_time_avg": 1.7302633603333863,
-        "full_read_time": 1.7810138949998873,
-        "selective_read_time": 0.28768923499956145,
-        "file_size_bytes": 106643169,
-        "peak_memory_bytes": 253063283
+        "write_time_avg": 1.861239776599905,
+        "full_read_time": 1.7544899164995513,
+        "selective_read_time": 0.3035036504998061,
+        "file_size_bytes": 106645320,
+        "peak_memory_bytes": 253056117.0,
+        "selective_peak_memory_bytes": 58038243.0
     },
     {
         "format": "jsonl",
-        "write_time_avg": 2.07035884633342,
-        "full_read_time": 24.2298610619996,
-        "selective_read_time": 2.9422845509998297,
-        "file_size_bytes": 209643088,
-        "peak_memory_bytes": 2566727208
+        "write_time_avg": 2.106661770199571,
+        "full_read_time": 22.289216663500156,
+        "selective_read_time": 21.35693501749938,
+        "file_size_bytes": 209645239,
+        "peak_memory_bytes": 2566752012.0,
+        "selective_peak_memory_bytes": 2566751860.0
     },
     {
         "format": "parquet_uncompressed",
-        "write_time_avg": 0.19084416499996829,
-        "full_read_time": 0.10991274399975737,
-        "selective_read_time": 0.020388725999964663,
-        "file_size_bytes": 61976674,
-        "peak_memory_bytes": 62523212
+        "write_time_avg": 0.1781249330007995,
+        "full_read_time": 0.05518614200082084,
+        "selective_read_time": 0.017922752000231412,
+        "file_size_bytes": 61977080,
+        "peak_memory_bytes": 61993095.5,
+        "selective_peak_memory_bytes": 8676959.0
     },
     {
         "format": "parquet_snappy",
-        "write_time_avg": 0.2799485900001552,
-        "full_read_time": 0.11915003400008572,
-        "selective_read_time": 0.019486655999571667,
-        "file_size_bytes": 54824392,
-        "peak_memory_bytes": 54832380
+        "write_time_avg": 0.2563575499996659,
+        "full_read_time": 0.0773282094987735,
+        "selective_read_time": 0.01730294349908945,
+        "file_size_bytes": 54817359,
+        "peak_memory_bytes": 54833266.5,
+        "selective_peak_memory_bytes": 6059710.0
     },
     {
         "format": "parquet_gzip",
-        "write_time_avg": 3.3003188113334545,
-        "full_read_time": 0.22427085399976932,
-        "selective_read_time": 0.028017928000281245,
-        "file_size_bytes": 38462985,
-        "peak_memory_bytes": 38470226
+        "write_time_avg": 3.2311563508006658,
+        "full_read_time": 0.1962835915001051,
+        "selective_read_time": 0.026727569999820844,
+        "file_size_bytes": 38459185,
+        "peak_memory_bytes": 38470476.5,
+        "selective_peak_memory_bytes": 4208653.0
     }
 ]
