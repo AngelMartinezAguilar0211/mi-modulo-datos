@@ -3,6 +3,8 @@ import json
 import time
 import tracemalloc
 import argparse
+import gc
+import statistics
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
@@ -65,6 +67,7 @@ def validate_equivalence(results):
 def run_benchmark():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", default="results/", help="Output directory for results")
+    parser.add_argument("--iters", type=int, default=5, help="Number of iterations per query")
     args = parser.parse_args()
 
     os.makedirs(args.output, exist_ok=True)
@@ -85,6 +88,9 @@ def run_benchmark():
         print(f"Error: {parquet_path} not found.")
         return
 
+    print(f"Starting rigorous benchmark ({args.iters} iterations)...")
+    print("Note: Peak RAM might be underreported for native engines (DuckDB/Polars) due to tracemalloc limitations.\n")
+
     for q_num in range(1, 9):
         q_id = f"Q{q_num}"
         print(f"Benchmarking {q_id}...")
@@ -95,31 +101,59 @@ def run_benchmark():
         for name, engine in engines.items():
             func = getattr(engine, q_id.lower())
             
-            tracemalloc.start()
-            start_time = time.perf_counter()
+            times = []
+            peaks = []
+            last_df = None
             
-            try:
-                # Execute query
-                res_df = func(parquet_path)
+            for i in range(args.iters):
+                gc.collect()
+                tracemalloc.start()
+                start_time = time.perf_counter()
                 
-                end_time = time.perf_counter()
-                current, peak = tracemalloc.get_traced_memory()
-                tracemalloc.stop()
+                try:
+                    # Execute query
+                    res_df = func(parquet_path)
+                    
+                    end_time = time.perf_counter()
+                    current, peak = tracemalloc.get_traced_memory()
+                    tracemalloc.stop()
+                    
+                    execution_time = end_time - start_time
+                    peak_ram_mb = peak / (1024 * 1024)
+                    
+                    times.append(execution_time)
+                    peaks.append(peak_ram_mb)
+                    last_df = res_df
+                    
+                except Exception as e:
+                    tracemalloc.stop()
+                    print(f"  {name} iteration {i+1} FAILED: {e}")
+                    q_metrics[name] = {"error": str(e)}
+                    break
+            
+            if name not in q_metrics or "error" not in q_metrics[name]:
+                # Calculate metrics
+                # Discard first run (cold start) if more than 1 iteration
+                if len(times) > 1:
+                    warm_times = times[1:]
+                    warm_peaks = peaks[1:]
+                    cold_time = times[0]
+                else:
+                    warm_times = times
+                    warm_peaks = peaks
+                    cold_time = times[0]
                 
-                execution_time = end_time - start_time
-                peak_ram_mb = peak / (1024 * 1024)
+                median_time = statistics.median(warm_times)
+                median_peak = statistics.median(warm_peaks)
                 
-                q_results[name] = res_df
+                q_results[name] = last_df
                 q_metrics[name] = {
-                    "time_s": execution_time,
-                    "ram_mb": peak_ram_mb
+                    "time_s": median_time,
+                    "ram_mb": median_peak,
+                    "cold_time_s": cold_time,
+                    "all_times": times
                 }
-                print(f"  {name}: {execution_time:.4f}s, {peak_ram_mb:.2f}MB")
-                
-            except Exception as e:
-                tracemalloc.stop()
-                print(f"  {name} FAILED: {e}")
-                q_metrics[name] = {"error": str(e)}
+                print(f"  {name}: median {median_time:.4f}s (cold: {cold_time:.4f}s), peak {median_peak:.2f}MB")
 
         # Validate
         valid, msg = validate_equivalence(q_results)

@@ -47,3 +47,38 @@ Una vez que hayas completado el benchmark, puedes generar automáticamente la ba
 uv run python plot_results.py
 ```
 > **Nota:** Esto creará el archivo `report.md` en la raíz del ejercicio y guardará los archivos `.png` en la carpeta `results/`. 
+
+---
+
+## Ejercicio 2: El Motor de Consultas
+
+En este ejercicio se implementa una suite de benchmarking para comparar tres de los motores de consulta en el ecosistema de Python: **pandas**, **Polars** y **DuckDB**. El objetivo es evaluar su rendimiento procesando un dataset de **1,000,000 de registros** en formato Parquet.
+
+### Características Principales
+- **8 Consultas de Negocio**: Desde agregaciones simples hasta ventanas de tiempo y rankings complejos.
+*   **Triple Validación**: El sistema valida automáticamente que los tres motores devuelvan el mismo resultado numérico para cada consulta.
+*   **Análisis de Planes**: Captura de planes de ejecución reales (`EXPLAIN ANALYZE`) para DuckDB.
+*   **Métricas**: Medición precisa de tiempo (latencia) y pico de memoria RAM.
+
+### Guía de Ejecución
+
+Navega a la carpeta del ejercicio:
+*Es necesario contar con el dataset test_1m_snappy.parquet en la carpeta data.*
+```bash
+cd ejercicio-02-consultas
+```
+
+Ejecuta el orquestador de benchmark:
+(Por default 5 iteraciones para cada query, en otro caso usar --iters <num>)
+```bash
+uv run python benchmark.py --output results/
+```
+
+Para añadir automáticamente los resultados en el reporte visual (manteniendo las interpretaciones y comentarios intactos):
+```bash
+uv run python create_report.py
+```
+
+### Resultados y Reporte
+El script generará un archivo `results/benchmark_results.json` con los datos crudos. El análisis detallado, incluyendo la interpretación de los planes de ejecución y las recomendaciones de arquitectura, se encuentra en:
+👉 [**ejercicio-02-consultas/report.md**](./ejercicio-02-consultas/report.md)
