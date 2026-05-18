@@ -1,0 +1,68 @@
+{
+    "with_indices": {
+        "P1": {
+            "time_ms": 0.04291599998396123,
+            "plan": "SEARCH transactions USING INDEX sqlite_autoindex_transactions_1 (transaction_id=?)",
+            "sla_met": true
+        },
+        "P2": {
+            "time_ms": 0.1293980001264572,
+            "plan": "SEARCH transactions USING INDEX idx_user_timestamp (user_id=?)",
+            "sla_met": true
+        },
+        "P3": {
+            "time_ms": 0.02328599998691061,
+            "plan": "SEARCH transactions USING INDEX idx_user_timestamp (user_id=? AND timestamp>? AND timestamp<?)",
+            "sla_met": true
+        },
+        "P4": {
+            "time_ms": 0.01189700014947448,
+            "plan": "SEARCH transactions USING INDEX idx_user_timestamp (user_id=? AND timestamp>?)",
+            "sla_met": true
+        },
+        "P5": {
+            "time_ms": 50.27107699993394,
+            "plan": "SEARCH transactions USING INDEX idx_country_code (country_code=?)\nUSE TEMP B-TREE FOR GROUP BY",
+            "sla_met": true
+        }
+    },
+    "without_indices": {
+        "P1": {
+            "time_ms": 0.09911900019687891,
+            "plan": "SEARCH transactions USING INDEX sqlite_autoindex_transactions_1 (transaction_id=?)"
+        },
+        "P2": {
+            "time_ms": 36.85567100001208,
+            "plan": "SEARCH transactions USING INDEX idx_user_timestamp (user_id=?)"
+        },
+        "P3": {
+            "time_ms": 38.06816400015123,
+            "plan": "SEARCH transactions USING INDEX idx_user_timestamp (user_id=? AND timestamp>? AND timestamp<?)"
+        },
+        "P4": {
+            "time_ms": 36.83765699997821,
+            "plan": "SEARCH transactions USING INDEX idx_user_timestamp (user_id=? AND timestamp>?)"
+        },
+        "P5": {
+            "time_ms": 68.95625600009225,
+            "plan": "SEARCH transactions USING INDEX idx_country_code (country_code=?)\nUSE TEMP B-TREE FOR GROUP BY"
+        }
+    },
+    "duckdb": {
+        "P1": {
+            "time_ms": 99.8482420000073
+        },
+        "P2": {
+            "time_ms": 69.74835100004384
+        },
+        "P3": {
+            "time_ms": 41.71557700010453
+        },
+        "P4": {
+            "time_ms": 6.753891000016665
+        },
+        "P5": {
+            "time_ms": 12.165844000037396
+        }
+    }
+}

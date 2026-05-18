@@ -1,0 +1,6 @@
+{
+    "duration_seconds": 10.122768621000006,
+    "chunk_size": 50000,
+    "wal_enabled": true,
+    "records": 1000000
+}
