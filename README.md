@@ -82,3 +82,15 @@ uv run python create_report.py
 ### Resultados y Reporte
 El script generará un archivo `results/benchmark_results.json` con los datos crudos. El análisis detallado, incluyendo la interpretación de los planes de ejecución y las recomendaciones de arquitectura, se encuentra en:
 👉 [**ejercicio-02-consultas/report.md**](./ejercicio-02-consultas/report.md)
+
+---
+
+## Ejercicio 3: La Capa Transaccional
+
+Este ejercicio se enfoca en implementar una capa de almacenamiento transaccional utilizando **SQLite**. El objetivo es diseñar un esquema optimizado con los índices correctos (B-Tree) para resolver 5 patrones de acceso específicos con latencias muy bajas (SLAs < 50ms), y comparar este rendimiento analítico contra DuckDB.
+
+### Guía de Ejecución y Resultados
+
+Toda la documentación técnica (como la justificación del esquema), las instrucciones detalladas para regenerar la base de datos, los comandos para ejecutar los benchmarks y el análisis detallado de los resultados (SQLite vs DuckDB) se encuentran en el README interno del ejercicio:
+
+👉 [**ejercicio-03-sqlite/README.md**](./ejercicio-03-sqlite/README.md)
