@@ -94,3 +94,16 @@ Este ejercicio se enfoca en implementar una capa de almacenamiento transaccional
 Toda la documentación técnica (como la justificación del esquema), las instrucciones detalladas para regenerar la base de datos, los comandos para ejecutar los benchmarks y el análisis detallado de los resultados (SQLite vs DuckDB) se encuentran en el README interno del ejercicio:
 
 👉 [**ejercicio-03-sqlite/README.md**](./ejercicio-03-sqlite/README.md)
+
+---
+
+## Ejercicio 4: El Sistema Completo (API Serving Layer)
+
+Este ejercicio se centra en integrar los componentes desarrollados previamente para construir una API REST de alto rendimiento utilizando **FastAPI**. El sistema implementa una **arquitectura híbrida** optimizada: utiliza **SQLite** (OLTP) para operaciones transaccionales de lectura y escritura de baja latencia, y **DuckDB** (OLAP) para agregaciones y consultas analíticas masivas sobre un millón de registros. Adicionalmente, cuenta con una capa de **caché hilo-segura** en memoria.
+
+### Guía de Ejecución y Resultados
+
+Toda la documentación técnica (incluyendo el Registro de Decisiones de Arquitectura - ADR), las instrucciones paso a paso para levantar el servidor y ejecutar las pruebas de validación automatizadas, así como el reporte detallado de latencias (Cold vs. Warm caché) y la justificación del cumplimiento de SLAs, se encuentran en el README interno del ejercicio:
+
+👉 [**ejercicio-04-sistema/README.md**](./ejercicio-04-sistema/README.md)
+
