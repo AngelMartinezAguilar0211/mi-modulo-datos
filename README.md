@@ -107,3 +107,16 @@ Toda la documentación técnica (incluyendo el Registro de Decisiones de Arquite
 
 👉 [**ejercicio-04-sistema/README.md**](./ejercicio-04-sistema/README.md)
 
+---
+
+## Ejercicio 5: El Backend con Estructura (Django + DRF)
+
+Este ejercicio consiste en reconstruir el backend del Ejercicio 4 utilizando **Django** y **Django REST Framework (DRF)**. Migrando de la flexibilidad de FastAPI a un framework más estructurado y convencional, el sistema conserva su **arquitectura híbrida** (SQLite para OLTP con índices del E3 y DuckDB para OLAP), incorpora **TokenAuthentication** para accesos protegidos, ofrece un panel de administración completo para gestionar transacciones, y cuenta con un comando para la ingesta de datos del Parquet en chunks.
+
+### Guía de Ejecución y Resultados
+
+Toda la documentación técnica, las instrucciones paso a paso para levantar el servidor con `uv`, migrar y poblar la base de datos de 1M de registros libre de advertencias, generar tokens de acceso y correr la suite de validación automatizada con `pytest`, se encuentran en el README interno del ejercicio:
+
+👉 [**ejercicio-05-django/README.md**](./ejercicio-05-django/README.md)
+
+

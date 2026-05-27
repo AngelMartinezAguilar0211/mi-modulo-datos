@@ -84,3 +84,10 @@ uv run pytest tests/test_api.py -v
 - `GET /users/{user_id}/transactions?page=1&page_size=20`: Listado de transacciones paginado del ORM.
 - `GET /users/{user_id}/stats`: Métricas transaccionales individuales del ORM.
 - `POST /transactions/batch`: Carga segura y atómica en lote con deduplicación en memoria.
+
+## NOTA:
+Debido a que las URL estan protegidas con `TokenAuthentication`, es posible no poder ver su funcionamiento abriendolas directamente en el navegador. Estas se pueden visualizar mediante herramientas como "curl", "postman" o "Insomnia". Por ejemplo, para visualizar las transacciones del usuario con ID 1 se puede ejecutar el siguiente comando:
+
+```bash
+curl -X GET http://127.0.0.1:8000/users/1/transactions -H "Authorization: Token <token_value>"
+```
