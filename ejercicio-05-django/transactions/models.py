@@ -15,7 +15,7 @@ class Transaction(models.Model):
         db_table = 'transactions'
         indexes = [
             models.Index(fields=['user_id', '-timestamp'], name='idx_user_timestamp'),
-            models.Index(fields=['country_code'], name='idx_country_code'),
+            models.Index(fields=['country_code', 'user_id'], name='idx_country_user'),
         ]
 
     def __str__(self):
