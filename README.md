@@ -119,4 +119,16 @@ Toda la documentación técnica, las instrucciones paso a paso para levantar el 
 
 👉 [**ejercicio-05-django/README.md**](./ejercicio-05-django/README.md)
 
+---
+
+## Ejercicio 6: El Pipeline de Datos (ETL)
+
+Este ejercicio consiste en construir un pipeline ETL (Extract, Transform, Load) robusto, modular, transaccional e idempotente para ingestar flujos incrementales de transacciones financieras. El sistema simula la llegada de flujos con fallos mediante un inyector probabilístico de errores, normaliza tipos y formatos a estándares internacionales en la capa de extracción, y valida rigurosamente las transacciones contra las reglas del dominio de negocio en la capa de transformación. Los registros que fallan las validaciones son desviados de forma automatizada a una carpeta de cuarentena en formato JSONLines (`.jsonl`), mientras que los válidos son cargados atómicamente en la base de datos SQLite en un único bloque de transacción explícito. Además, la persistencia integra el Covering Index compuesto optimizado a partir del feedback del E03.
+
+### Guía de Ejecución y Resultados
+
+Toda la documentación técnica del diseño del pipeline, el desglose de métricas por corrida de ingesta en reportes JSON, comandos exactos para ejecutar la orquestación y las pruebas unitarias y de integración desarrolladas con `pytest`, se encuentran en el README interno de este ejercicio:
+
+👉 [**ejercicio-06-pipelines/README.md**](./ejercicio-06-pipelines/README.md)
+
 
