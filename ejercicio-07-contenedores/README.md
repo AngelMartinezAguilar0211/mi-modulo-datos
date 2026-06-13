@@ -21,6 +21,12 @@ sudo usermod -aG docker $USER
 
 ---
 
+Se debe de contar con el archivo test_1m_snappy.parquet en la carpeta data/, se puede generar con el siguiente comando:
+
+```bash
+uv run python benchmark_cli.py --size 1m --formats parquet_snappy
+```
+
 ## Guía Operacional de Comandos
 
 Todos los comandos presentados a continuación se encuentran verificados y deben ser ejecutados desde la raíz del directorio del ejercicio (`ejercicio-07-contenedores/`):
