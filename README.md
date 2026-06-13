@@ -131,4 +131,16 @@ Toda la documentación técnica del diseño del pipeline, el desglose de métric
 
 👉 [**ejercicio-06-pipelines/README.md**](./ejercicio-06-pipelines/README.md)
 
+---
+
+## Ejercicio 7: De tu Máquina al Mundo (Contenerización con Docker)
+
+Este ejercicio implementa la contenerización completa de la API REST transaccional y analítica (basada en **FastAPI**, **SQLite** y **DuckDB**). El sistema define la infraestructura como código usando **Docker Compose**, orquestando un contenedor efímero (`setup`) para la creación e ingesta eficiente de la base de datos de 1M de registros a partir del Parquet, y un contenedor de producción (`api`) para servir el framework web, el cual inicia únicamente tras la finalización exitosa del setup. La arquitectura incorpora un health check automático cada 30 segundos, logs estructurados en formato JSON dirigidos a `stdout`, y una gestión de rutas y configuraciones a través de variables de entorno, manteniendo la imagen de ejecución por debajo de los 300MB.
+
+### Guía de Ejecución y Resultados
+
+Toda la documentación técnica de infraestructura, la justificación de pesos de imágenes, el direccionamiento de variables de entorno y los comandos exactos de ciclo de vida (levantar, inspeccionar logs, limpiar volúmenes) se encuentran en el README interno del ejercicio:
+
+👉 [**ejercicio-07-contenedores/README.md**](./ejercicio-07-contenedores/README.md)
+
 
