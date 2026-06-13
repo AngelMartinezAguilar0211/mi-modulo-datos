@@ -1,0 +1,31 @@
+services:
+  setup:
+    build:
+      context: .
+      dockerfile: Dockerfile.setup
+    volumes:
+      # Bind mount host data directory relative to this folder
+      - ../data:/data
+    environment:
+      # Explicit environment variables with default values if not defined in .env or shell
+      - SQLITE_DB_PATH=${SQLITE_DB_PATH:-/data/transactions.db}
+      - PARQUET_FILE_PATH=${PARQUET_FILE_PATH:-/data/test_1m_snappy.parquet}
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      # Bind to localhost (127.0.0.1) for secure web coding guidelines (prevents public network exposure)
+      - "127.0.0.1:8000:8000"
+    volumes:
+      # Bind mount host data directory relative to this folder
+      - ../data:/data
+    environment:
+      # Explicit environment variables with default values if not defined in .env or shell
+      - SQLITE_DB_PATH=${SQLITE_DB_PATH:-/data/transactions.db}
+      - PARQUET_FILE_PATH=${PARQUET_FILE_PATH:-/data/test_1m_snappy.parquet}
+      - CACHE_TTL=${CACHE_TTL:-60}
+    depends_on:
+      setup:
+        condition: service_completed_successfully

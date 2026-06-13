@@ -1,0 +1,36 @@
+# ==========================================
+# Stage 1: Build Dependencies
+# ==========================================
+FROM python:3.11-slim AS builder
+
+WORKDIR /build
+
+# Install uv for extremely fast dependency installation
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+RUN uv venv /opt/venv
+
+# Install only duckdb since sqlite3 is part of Python's standard library
+RUN . /opt/venv/bin/activate && \
+    uv pip install --no-cache duckdb
+
+# ==========================================
+# Stage 2: Final Minimal Setup Image
+# ==========================================
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Copy virtual environment from builder stage
+COPY --from=builder /opt/venv /opt/venv
+
+# Ensure paths inside the virtual environment are used by default
+ENV PATH="/opt/venv/bin:$PATH"
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Copy the setup ingestion script
+COPY setup/db_setup.py setup/db_setup.py
+
+# Run database setup and ingestion
+CMD ["python", "setup/db_setup.py"]
