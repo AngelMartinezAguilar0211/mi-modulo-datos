@@ -143,4 +143,17 @@ Toda la documentación técnica de infraestructura, la justificación de pesos d
 
 👉 [**ejercicio-07-contenedores/README.md**](./ejercicio-07-contenedores/README.md)
 
+---
+
+## Ejercicio 8: Proyecto Final — Sistema de Monitoreo Transaccional Fintech LATAM
+
+Este ejercicio consiste en la integración de todos los componentes clave desarrollados a lo largo del módulo en un sistema de monitoreo transaccional completo para una fintech en LATAM. El sistema implementa una API REST con **FastAPI** y **Uvicorn**, un motor de datos híbrido **SQLite** (OLTP, para queries de baja latencia e inserción idempotente en batch) y **DuckDB** (OLAP en memoria, para consultas analíticas sobre Parquet), un pipeline de ETL modular e idempotente para la ingesta de archivos CSV externos con detección de anomalías y manejo de registros en cuarentena, y finalmente una infraestructura completamente contenerizada con **Docker Compose** (setup + api) optimizando las imágenes por debajo de 300MB.
+
+### Guía de Ejecución y Resultados
+
+Las decisiones técnicas de arquitectura, la especificación de endpoints REST, la guía operacional detallada y la ejecución de pruebas unitarias y de integración (`pytest`) se detallan en el README interno del ejercicio:
+
+👉 [**ejercicio-08-final/README.md**](./ejercicio-08-final/README.md)
+
+
 
