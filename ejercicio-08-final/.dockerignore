@@ -1,0 +1,31 @@
+# Ignore local virtual environment
+.venv
+venv
+
+# Ignore Python caches
+**/__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore local config files
+.env
+.gitignore
+
+# Ignore any databases, CSVs, or Parquet datasets inside context
+*.db
+*.parquet
+*.csv
+data/
+**/data
+
+# Ignore git logs and workspace items
+.git
+.github
+.pytest_cache
+tests/
+
+# Ignore pipeline outputs
+quarantine/
+results/
+temp_uploads/
